@@ -235,6 +235,9 @@ function Pokeio() {
 
             if (profile.username) {
                 self.DebugPrint('[i] Logged in!');
+            } else {
+              self.DebugPrint('[i] Log in Failed!');
+              self.playerInfo.accessToken = '';
             }
             callback(null, profile);
         });
