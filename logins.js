@@ -91,7 +91,7 @@ module.exports = {
                     }
 
                     token = body.split('token=')[1];
-                    token = token.split('&')[0];
+                    token = token && token.split && token.split('&')[0];
 
                     if (!token) {
                         return callback(new Error('Login failed'), null);

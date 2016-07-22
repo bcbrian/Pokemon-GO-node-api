@@ -154,12 +154,18 @@ function Pokeio() {
             }
             self.GetAccessToken(username, password, function (err, token) {
                 if (err) {
+                    self.playerInfo.accessToken = '';
                     return callback(err);
                 }
                 // Getting api endpoint
                 self.GetApiEndpoint(function (err, api_endpoint) {
                     if (err) {
+                        self.playerInfo.accessToken = '';
                         return callback(err);
+                    }
+                    if(api_enpoint === "https://null/rpc"){
+                      self.playerInfo.accessToken = '';
+                      return callback(Error("Something went wrong in log in process"));
                     }
                     callback(null);
                 });
