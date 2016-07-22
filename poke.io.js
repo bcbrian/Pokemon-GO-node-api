@@ -9,7 +9,7 @@ var ProtoBuf = require('protobufjs');
 var GoogleOAuth = require('gpsoauthnode');
 var ByteBuffer = require('bytebuffer');
 var fs = require('fs');
-var s2 = require('s2geometry-node');
+var s2 = require('s2');
 
 var Logins = require('./logins');
 

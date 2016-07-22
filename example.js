@@ -35,16 +35,30 @@ Pokeio.init(username, password, location, provider, function(err) {
 
 
         Pokeio.Heartbeat(function(err,hb) {
+          console.log("Heartbeat: ", JSON.stringify(hb, null, 2));
             if(err) {
                 console.log(err);
             }
 
             for (var i = hb.cells.length - 1; i >= 0; i--) {
-                if(hb.cells[i].NearbyPokemon[0]) {
+              console.log("LOGGING CELL: ", i);
+                // if(hb.cells[i].NearbyPokemon[0]) {
                     //console.log(Pokeio.pokemonlist[0])
-                    var pokemon = Pokeio.pokemonlist[parseInt(hb.cells[i].NearbyPokemon[0].PokedexNumber)-1]
-                    console.log('[+] There is a ' + pokemon.name + ' at ' + hb.cells[i].NearbyPokemon[0].DistanceMeters.toString() + ' meters')
+              for (var j = hb.cells[i].NearbyPokemon.length - 1; j >= 0; j--) {
+                console.log("LOGGING NB POKE: ", j);
+                var pokemon = hb.cells[i] && hb.cells[i].NearbyPokemon[j] && hb.cells[i].NearbyPokemon[j].PokedexNumber && Pokeio.pokemonlist[parseInt(hb.cells[i].NearbyPokemon[j].PokedexNumber)-1]
+                if(pokemon){
+                  console.log('[+] There is a ' + pokemon.name + ' at ' + hb.cells[i].NearbyPokemon[j].DistanceMeters.toString() + ' meters')
                 }
+              }
+              for (var j = hb.cells[i].WildPokemon.length - 1; j >= 0; j--) {
+                console.log("LOGGING NB POKE: ", j);
+                var pokemon = hb.cells[i] && hb.cells[i].WildPokemon[j] && hb.cells[i].WildPokemon[j].PokedexNumber && Pokeio.pokemonlist[parseInt(hb.cells[i].WildPokemon[j].PokedexNumber)-1]
+                if(pokemon){
+                  console.log('[+] There is a ' + pokemon.name + ' at ' + hb.cells[i].WildPokemon[j].DistanceMeters.toString() + ' meters')
+                }
+              }
+                // }
             }
 
         });
