@@ -163,7 +163,7 @@ function Pokeio() {
                         self.playerInfo.accessToken = '';
                         return callback(err);
                     }
-                    if(api_enpoint === "https://null/rpc"){
+                    if(api_endpoint === "https://null/rpc"){
                       self.playerInfo.accessToken = '';
                       return callback(Error("Something went wrong in log in process"));
                     }
