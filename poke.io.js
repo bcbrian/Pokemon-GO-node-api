@@ -148,6 +148,10 @@ function Pokeio() {
                 return callback(err);
             }
             // Getting access token
+            if(self.playerInfo.accessToken !== ''){
+              console.log("[i] Already have token");
+              return callback(null);
+            }
             self.GetAccessToken(username, password, function (err, token) {
                 if (err) {
                     return callback(err);

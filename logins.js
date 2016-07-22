@@ -24,7 +24,21 @@ module.exports = {
             if (err) {
                 return callback(err, null);
             }
-            data = JSON.parse(body);
+            try{
+              if (body) {
+                data = JSON.parse(body);
+                if (data.errors && data.errors.length !== 0) {
+                  return callback(new Error('Error logging in: ' + data.errors[0]), null);
+                }
+              }
+            }catch(error){
+              console.log("body unparsable: ", body);
+              data = false;
+            }
+
+            if(!data){
+              return callback(new Error('Error logging in: ' + body), null);
+            }
 
             options = {
                 url: login_url,
